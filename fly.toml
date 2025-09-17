@@ -1,0 +1,45 @@
+# Fly.io configuration for Evolution API
+app = "whatsapp-evolution-api"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile.evolution"
+
+[env]
+  DATABASE_PROVIDER = "postgresql"
+  DATABASE_CONNECTION_CLIENT_NAME = "evolution_exchange"
+  DATABASE_SAVE_DATA_CHATS = "true"
+  DATABASE_SAVE_DATA_HISTORIC = "true"
+  AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES = "true"
+  CACHE_REDIS_SAVE_INSTANCES = "false"
+  CACHE_LOCAL_ENABLED = "false"
+  DATABASE_SAVE_MESSAGE_UPDATE = "true"
+  DATABASE_ENABLED = "true"
+  DATABASE_SAVE_DATA_LABELS = "true"
+  CACHE_REDIS_ENABLED = "true"
+  CACHE_REDIS_PREFIX_KEY = "evolution"
+  DATABASE_SAVE_DATA_INSTANCE = "true"
+  DATABASE_SAVE_DATA_NEW_MESSAGE = "true"
+  DATABASE_SAVE_DATA_CONTACTS = "true"
+  AUTHENTICATION_API_KEY = "whatsapp-exporter-key-2024"
+  TZ = "America/Sao_Paulo"
+  DOCKER_ENV = "true"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[http_service.checks]]
+  interval = "10s"
+  timeout = "2s"
+  grace_period = "5s"
+  method = "get"
+  path = "/"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512

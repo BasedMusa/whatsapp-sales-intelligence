@@ -1,0 +1,30 @@
+{
+  "name": "whatsapp-sales-intelligence",
+  "version": "1.0.0",
+  "description": "AI-powered WhatsApp sales conversation analysis for Evolution API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "analyze": "node src/index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "dotenv": "^16.4.5",
+    "openai": "^4.28.4",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.10.9"
+  },
+  "keywords": [
+    "whatsapp",
+    "sales",
+    "ai",
+    "analysis",
+    "evolution-api"
+  ],
+  "author": "Sales Intelligence Team",
+  "license": "MIT"
+}

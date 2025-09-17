@@ -1,0 +1,25 @@
+# Fly.io configuration for Redis
+app = "whatsapp-redis"
+primary_region = "iad"
+
+[build]
+  image = "redis:7-alpine"
+
+[env]
+  REDIS_ARGS = "--appendonly yes --appendfsync everysec"
+
+[[services]]
+  internal_port = 6379
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 6379
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
+
+[mounts]
+  source = "redis_data"
+  destination = "/data"

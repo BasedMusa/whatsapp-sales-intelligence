@@ -1,0 +1,29 @@
+services:
+  whatsapp-sales-intelligence:
+    build: .
+    container_name: whatsapp_sales_analyzer
+    restart: unless-stopped
+    environment:
+      - DB_USER=postgres.cjclurjjnljsulihbgoi
+      - DB_HOST=aws-0-us-east-1.pooler.supabase.com
+      - DB_NAME=postgres
+      - DB_PASSWORD=wI7.#WjF4k:EQ2Z
+      - DB_PORT=6543
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CONCURRENT_CHATS=8
+      - BATCH_SIZE=50
+      - MAX_CONVERSATION_LENGTH=200
+      - LOG_LEVEL=info
+    volumes:
+      - ./logs:/app/logs
+      - ./.env:/app/.env:ro
+    networks:
+      - evolution-network
+    command: npm start
+
+networks:
+  evolution-network:
+    external: true
+
+# Note: postgres service should already exist in your evolution setup
+# This docker-compose assumes it's running on the evolution_network

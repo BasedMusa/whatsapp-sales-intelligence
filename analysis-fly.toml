@@ -1,0 +1,31 @@
+# Fly.io configuration for Analysis System
+app = "whatsapp-analysis-system"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  NODE_ENV = "production"
+  LOG_LEVEL = "info"
+  CONCURRENT_CHATS = "8"
+  BATCH_SIZE = "50"
+  MAX_CONVERSATION_LENGTH = "200"
+  OPENAI_MODEL = "gpt-3.5-turbo"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024

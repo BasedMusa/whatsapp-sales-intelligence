@@ -1,0 +1,42 @@
+services:
+  # Evolution API Service
+  - type: web
+    name: whatsapp-evolution
+    runtime: docker
+    dockerfilePath: ./Dockerfile.evolution
+    envVars:
+      - key: DATABASE_PROVIDER
+        value: postgresql
+      - key: DATABASE_CONNECTION_CLIENT_NAME
+        value: evolution_exchange
+      - key: DATABASE_SAVE_DATA_CHATS
+        value: "true"
+      - key: DATABASE_SAVE_DATA_HISTORIC
+        value: "true"
+      - key: AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES
+        value: "true"
+      - key: CACHE_LOCAL_ENABLED
+        value: "true"  # Using local cache instead of Redis
+      - key: CACHE_REDIS_ENABLED
+        value: "false"  # Disable Redis for free tier
+      - key: DATABASE_SAVE_MESSAGE_UPDATE
+        value: "true"
+      - key: DATABASE_ENABLED
+        value: "true"
+      - key: DATABASE_CONNECTION_URI
+        value: postgresql://postgres:wI7.%23WjF4k%3AEQ2Z@db.cjclurjjnljsulihbgoi.supabase.co:5432/postgres?schema=public&sslmode=require
+      - key: DATABASE_SAVE_DATA_LABELS
+        value: "true"
+      - key: DATABASE_SAVE_DATA_INSTANCE
+        value: "true"
+      - key: DATABASE_SAVE_DATA_NEW_MESSAGE
+        value: "true"
+      - key: DATABASE_SAVE_DATA_CONTACTS
+        value: "true"
+      - key: AUTHENTICATION_API_KEY
+        value: whatsapp-exporter-key-2024
+      - key: TZ
+        value: America/Sao_Paulo
+    plan: free  # Free tier
+    healthCheckPath: /
+    autoDeploy: false
